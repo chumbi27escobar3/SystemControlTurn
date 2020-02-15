@@ -4,6 +4,7 @@ public class Turn {
 
 	private String turno;
 	private boolean status;
+	private boolean atendido;
 	
 //	relacion
 	private User user;
@@ -12,7 +13,18 @@ public class Turn {
 		
 		this.turno = turno;
 		this.status = status;
+		
 	}
+
+	public boolean getAtendido() {
+		return atendido;
+	}
+
+	public void setAtendido(boolean atendido) {
+		this.atendido = atendido;
+	}
+
+
 
 	public User getUser() {
 		return user;

@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import Exception.*;
 import model.Company;
 
 public class Main {
@@ -81,10 +82,19 @@ public class Main {
 				System.out.println("the user has been created correctly");
 				break;
 			case 2:
-				System.out.print("Consultar el documentos: ");
+				System.out.println("Consultar el documentos: ");
 				int ida = Integer.parseInt(s.nextLine());
-				int r = com.busquedaUsuario(ida);
-				System.out.println("");
+				int r = 0;
+				try {
+					r = com.busquedaUsuario(ida);
+				} catch (userNotUnfound e2) {
+					System.out.println("Debe registrarse primero en el programa");
+					e2.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("TD              " + "Nombre Completo       " + "Telefono");
+				System.out.println(com.getUsers().get(r).getTD() + "           " + com.getUsers().get(r).getName() + com.getUsers().get(r).getLastName()+ "         " + com.getUsers().get(r).getPhone());
 				if (com.asignarTurno(r) == true) {
 					System.out.println("El Turno asignado para " + com.getTurns().get(r).getUser().getName() + " es:  "
 							+ com.getTurns().get(r));

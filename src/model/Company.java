@@ -1,6 +1,8 @@
 package model;
 
 import Exception.*;
+
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.ArrayList;
 
 public class Company {
@@ -29,24 +31,47 @@ public class Company {
 		this.turns = turns;
 	}
 
+	public String buscarPrimerTurno() {
+		String m = "";
+		int letra = 65;
+		int numero1 = 0;
+		int numero2 = 0;
+		if (users.size() == 0) {
+			letra = 65;
+			numero1 = 0;
+			numero2 = 0;
+		} else {
+			String turn = turns.get(turns.size()).getTurno();
+			String[] tunrs = turn.split("");
+			letra = Integer.parseInt(tunrs[0]);
+			numero1 = Integer.parseInt(tunrs[1]);
+			numero2 = Integer.parseInt(tunrs[2]);
+		}
+		m = (char)letra + numero1 + numero2 + "";
+		return m; 
+	}
+
 	public String inicializarTurno(String turn) {
 		String[] ne = turn.split("");
 		int numero1 = Integer.parseInt(ne[1]);
 		int numero2 = Integer.parseInt(ne[2]);
 		int letraNume = Integer.parseInt((ne[0]));
 		String m = "";
-		if (numero1 == 9 && numero2 == 9) {
+		if (letraNume == 90 && numero1 == 9 && numero2 == 9) {
+			letraNume = 65;
+			numero1 = 0;
+			numero2 = 0;
+		} else if (numero1 == 9 && numero2 == 9) {
 			letraNume++;
-		} else if (letraNume == 90 && numero1 == 9 && numero2 == 9) {
-				letraNume = 65;
+			numero2 = 0;
+			numero1 = 0;
 		} else if (numero2 == 9) {
-				numero1++;
-				numero2 = 0;
+			numero1++;
+			numero2 = 0;
 		} else {
 			numero2++;
 		}
-		
-		m = (char)letraNume + numero1 + numero2 + "";
+		m = (char) letraNume + numero1 + numero2 + "";
 		return m;
 	}
 
@@ -64,46 +89,37 @@ public class Company {
 			throw new IdUsedException();
 		}
 	}
-	
+
 	public String darUltimoTurn() {
 		String m = "";
 		m = turns.get(turns.size()) + "";
 		return m;
 	}
+	
+	public int turnoPorAtender() {
+		int i = 0;
+		boolean encontroTurno = false;
+		for (int j = 0; j < turns.size() && !encontroTurno; j++) {
+			if (turns.get(i).getStatus() == true) {
+				i = j;
+				encontroTurno = true;
+			}
+		}
+		return i;
+	}
 
-//		for (int i = 0; i < turns.size(); i++) {
-//			m = (char) letraNume + "";
-//						numero2++;
-//			if (numero2 == 9) {
-//				numero1++;
-//			}
-//			if (numero1 == 9 && numero2 == 9) {
-//				letraNume++;
-//			}
-//
-//		}
-//
-//		return m;
-//	}
-
-//	public boolean asignarTurno(int t) {
-//		boolean r = false;
-//		if (turns.get(t).getStatus() == true) {
-//			r = true;
-//		}
-//		return r;
-//	}
-//
-//
-//	public int busquedaUsuario(int id) {
-//		int r = 0;
-//		for (int i = 0; i < turns.size(); i++) {
-//			if (turns.get(i).getUser().getId() == id) {
-//				r = i;
-//			}
-//		}
-//		return r;
-//	}
+	public int busquedaUsuario(int id)throws userNotUnfound {
+		int r = 214312;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == id) {
+				r = i;
+			}
+		}
+		if (r == 214312) {
+			throw new userNotUnfound();
+		}
+		return r;
+	}
 //
 //	public String contadorTurnoActual() {
 //		String m = "";
