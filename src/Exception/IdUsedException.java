@@ -3,7 +3,7 @@ package Exception;
 public class IdUsedException extends Exception {
 
 	public IdUsedException() {
-		super("Id used");
+		super("The document is already registered in our system");
 	}
 	
 }

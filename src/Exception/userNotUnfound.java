@@ -1,8 +1,8 @@
 package Exception;
 
-public class userNotUnfound extends Exception {
+public class UserNotUnfound extends Exception {
 
-	public userNotUnfound() {
+	public UserNotUnfound() {
 		super("User not Unfound");
 	}
 

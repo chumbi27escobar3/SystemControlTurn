@@ -33,10 +33,10 @@ public class Company {
 
 	public String buscarPrimerTurno() {
 		String m = "";
-		int letra = 65;
+		int letra = 0;
 		int numero1 = 0;
 		int numero2 = 0;
-		if (users.size() == 0) {
+		if (turns.size() == 0) {
 			letra = 65;
 			numero1 = 0;
 			numero2 = 0;
@@ -71,7 +71,7 @@ public class Company {
 		} else {
 			numero2++;
 		}
-		m = (char) letraNume + numero1 + numero2 + "";
+		m = (char)letraNume + numero1 + numero2 + "";
 		return m;
 	}
 
@@ -89,12 +89,6 @@ public class Company {
 			throw new IdUsedException();
 		}
 	}
-
-	public String darUltimoTurn() {
-		String m = "";
-		m = turns.get(turns.size()) + "";
-		return m;
-	}
 	
 	public int turnoPorAtender() {
 		int i = 0;
@@ -108,7 +102,7 @@ public class Company {
 		return i;
 	}
 
-	public int busquedaUsuario(int id)throws userNotUnfound {
+	public int busquedaUsuario(int id)throws UserNotUnfound {
 		int r = 214312;
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getId() == id) {
@@ -116,23 +110,18 @@ public class Company {
 			}
 		}
 		if (r == 214312) {
-			throw new userNotUnfound();
+			throw new UserNotUnfound();
 		}
 		return r;
 	}
-//
-//	public String contadorTurnoActual() {
-//		String m = "";
-//		return m;
-//	}
-//
-//	public void turnoAtendido() {
-//
-//	}
-//
-//	public void usuarioNoAtendido() {
-//
-//	}
+
+	public void turnoAtendido(int i) {
+		turns.get(i).setAtendido(true);
+	}
+
+	public void usuarioNoAtendido(int i) {
+		turns.get(i).setAtendido(false);
+	}
 //
 //	public int unicoId(int p) {
 //		boolean oe = false;

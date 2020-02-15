@@ -4,13 +4,6 @@ import java.util.ArrayList;
 
 public class User {
 
-	//Constantes
-	public static final String CEDULA_DE_CUIDADANIA = "Cedula de cuidadania";
-	public static final String TARJETA_DE_IDENTIDAD = "Tarjeta de Identidad";
-	public static final String REGISTRO_CIVIL = "Registro Civil";
-	public static final String PASAPORTE = "Pasaporte";
-	public static final String CEDULA_DE_EXTRANJERIA = "Cedula de Extranjeria";
-
 	//Atributos
 	private int id;
 	private String name;
