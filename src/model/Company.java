@@ -1,5 +1,6 @@
 package model;
 
+import Exception.*;
 import java.util.ArrayList;
 
 public class Company {
@@ -28,29 +29,48 @@ public class Company {
 		this.turns = turns;
 	}
 
-	public void addTurn(int id) {
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getId() == id && users.get(i).getTurnss().get(i).getStatus() == false) {
-//				users.get(i).getTurnss().get(i).setTurno(turno);
-			}
-		}
-	}
-
 	public String inicializarTurno(String turn) {
 		String[] ne = turn.split("");
 		int numero1 = Integer.parseInt(ne[1]);
 		int numero2 = Integer.parseInt(ne[2]);
-		int letraNume = (int)(ne[0].charAt(0));
+		int letraNume = Integer.parseInt((ne[0]));
 		String m = "";
-		if (numero2 == 9) {
-			numero1++;
-		}
 		if (numero1 == 9 && numero2 == 9) {
 			letraNume++;
+		} else if (letraNume == 90 && numero1 == 9 && numero2 == 9) {
+				letraNume = 65;
+		} else if (numero2 == 9) {
+				numero1++;
+				numero2 = 0;
+		} else {
+			numero2++;
 		}
+		
 		m = (char)letraNume + numero1 + numero2 + "";
 		return m;
 	}
+
+	public void addUser(String TD, int id, String name, String lastName, int phone, String address)
+			throws IdUsedException {
+		boolean encontro = false;
+		for (int i = 0; i < users.size() && !encontro; i++) {
+			if (users.get(i).getId() == id) {
+				encontro = true;
+			}
+		}
+		if (encontro == false) {
+			users.add(new User(TD, id, name, lastName, phone, address));
+		} else if (encontro == true) {
+			throw new IdUsedException();
+		}
+	}
+	
+	public String darUltimoTurn() {
+		String m = "";
+		m = turns.get(turns.size()) + "";
+		return m;
+	}
+
 //		for (int i = 0; i < turns.size(); i++) {
 //			m = (char) letraNume + "";
 //						numero2++;

@@ -60,7 +60,7 @@ public class Main {
 				}
 				System.out.println("It is mandatory to enter the first 4 attributes");
 				System.out.print("digite numero del documento: ");
-				int id = com.unicoId(Integer.parseInt(s.nextLine()));
+				int id = Integer.parseInt(s.nextLine());
 				System.out.print("Digite los nombre: ");
 				String name = s.nextLine();
 				System.out.print("Digite los apellidos: ");
@@ -68,8 +68,16 @@ public class Main {
 				System.out.println("Digite the phone: ");
 				int phone = Integer.parseInt(s.nextLine());
 				System.out.println("Digite the address: ");
-				String address = s.nextLine();// falta colocarle la expecion de los primeros 4
-				com.getTurns().get(0).addUser(TD, id, name, lastName, phone, address);// falta la excepcion de que se vea si ya esta creado el  usuario
+				String address = s.nextLine();
+				try {
+					com.addUser(TD, id, name, lastName, phone, address);
+				} catch(ArithmeticException exce) {
+						// falta colocarle la expecion de los primeros 4
+				} catch(Exception exce) {
+						// falta colocarle la expecion de los primeros 4
+				}
+				}
+				// falta la excepcion de que se vea si ya esta creado el  usuario
 				System.out.println("the user has been created correctly");
 				break;
 			case 2:
